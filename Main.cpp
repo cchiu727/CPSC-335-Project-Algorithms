@@ -20,7 +20,7 @@ main()
     DiskList* head = NULL;
 
     // Insert 6. So linked list becomes 6->NULL
-    push(*head, 6);
+    push(&head, 6);
 
     // Insert 7 at the beginning. So
     // linked list becomes 7->6->NULL
