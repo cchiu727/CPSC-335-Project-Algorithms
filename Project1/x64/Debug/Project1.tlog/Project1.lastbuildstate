@@ -1,2 +1,2 @@
-#TargetFrameworkVersion=v4.0:PlatformToolSet=v142:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0
-Debug|x64|C:\Users\rafae\Desktop\C++ s.b\assignment_03_create_a_dll_list\assignment_03_create_a_dll_list\|
+PlatformToolSet=v142:VCToolArchitecture=Native32Bit:VCToolsVersion=14.29.30133:VCServicingVersionCrtHeaders=14.29.30136:TargetPlatformVersion=10.0.19041.0:
+Debug|x64|C:\Users\steph\Desktop\Stephanie's stuff\CPSC 335 Algorithm Engineering\Project_1\335ProjectOne\|
