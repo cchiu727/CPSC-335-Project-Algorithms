@@ -11,7 +11,7 @@ disks, the first 𝑛 disks are dark, the next 𝑛 disks are light, and an inte
 Since C++ cannot make actual shapes in code, we used numbers to represent the light and dark circles. 0 represents the dark circles and 1 represents the light circles
 
 #Requirements
-
+The only thing you need is the cpp files themselves. Nothing extra is needed other than basic Linux commands.
 
 #Installation
 Install this code by simply downloading it and running it normally in Tuffix
