@@ -5,6 +5,7 @@
 
 using namespace std;
 
+int exhPattern[14];
 
 void exhaustivePattern()
 {
@@ -31,10 +32,29 @@ void exhaustivePattern()
     }
     cout << endl;
 }
+
+void printArray()
+{
+    int n = 15;
+    for (size_t i = 1; i <= n; i++)
+    {
+        if (i == n)
+        {
+            cout << exhPattern[i];
+        }
+        else
+        {
+            cout << exhPattern[i] << ", ";
+        }
+    }
+    cout << endl;
+}
+
 // main
 int main()
 {
     exhaustivePattern();
+    printArray();
 
     return 0;
 }
