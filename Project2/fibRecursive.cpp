@@ -19,7 +19,7 @@ int fib(int n) {
 int userPrompt() {
     int num;
     std::cout << "Enter the number of terms in the Fibonacci series." << std::endl;
-    std::cout << "(Must be an integer n > 0):";
+    std::cout << "(Must be an integer n > 0): ";
     std::cin >> num;
     if (num < 0) {
         std::cout << "ERROR: Invalid input" << std::endl;
@@ -29,12 +29,16 @@ int userPrompt() {
     return num;
 }
 
+void printSeries(int n) {
+    for (int i = 0; i < n; i++) {
+        std::cout << fib(i) << ", ";
+    }
+}
+
 int main() {
     int num = userPrompt();
 
-    for (int i = 0; i < num; i++) {
-        std::cout << fib(i) << ", ";
-    }
+    printSeries(num);
 
     return 0;
 }
