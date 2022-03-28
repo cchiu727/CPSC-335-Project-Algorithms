@@ -56,5 +56,6 @@ int main()
 
     Subarray(V, n);
 
+    system("PAUSE");
     return 0;
 }
