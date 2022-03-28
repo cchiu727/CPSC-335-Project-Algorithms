@@ -10,7 +10,11 @@ All numbers used in the Fibonacci questions must be postive. The subarray questi
 The only thing you need is the cpp files themselves. Nothing extra is needed other than basic Linux commands.
 
 #Installation 
-Install this code by simply downloading it and running it normally in Tuffix. The commands for running are g++ main.cpp -o main.cpp and ./main
+Install this code by simply downloading it and running it normally in Tuffix. The commands for running are g++ <FILENAME>.cpp -o <FILENAME> and ./<FILENAME>
+(Note: type your desired file name in place of <FILENAME>)
 
 #Configuration 
 You are allowed to determine how many items appear in the list. You can also change the array in subarray problem to try out different outputs.
+For fibRecursive.cpp, it asks the user to input a positive integer n. It will output the nth term in the Fibonacci Sequence.
+For fibRatio.cpp, it asks the user to input a positive integer p, and positive integer n. p should be less than n. It will output the Fibnoacci sequence starting at the pth term up until the nth term.
+For sumArray.cpp, ADD DIRECTIONS HERE
