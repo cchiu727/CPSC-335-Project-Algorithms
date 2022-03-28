@@ -17,4 +17,4 @@ Install this code by simply downloading it and running it normally in Tuffix. Th
 You are allowed to determine how many items appear in the list. You can also change the array in subarray problem to try out different outputs.
 For fibRecursive.cpp, it asks the user to input a positive integer n. It will output the nth term in the Fibonacci Sequence.
 For fibRatio.cpp, it asks the user to input a positive integer p, and positive integer n. p should be less than n. It will output the Fibnoacci sequence starting at the pth term up until the nth term.
-For sumArray.cpp, ADD DIRECTIONS HERE
+For sumArray.cpp, the user can put in an array of several values and in any order. In doing so, the program will create a subarray of the highest sums from the orignal array.
