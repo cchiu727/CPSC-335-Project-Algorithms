@@ -10,7 +10,7 @@ All numbers used in the Fibonacci questions must be postive. The subarray questi
 The only thing you need is the cpp files themselves. Nothing extra is needed other than basic Linux commands.
 
 #Installation 
-Install this code by simply downloading it and running it normally in Tuffix. The commands for running are g++ <FILENAME>.cpp -o <FILENAME> and ./<FILENAME>
+ Three .exe files are included in the .zip file. However, if any errors occur, please refer to the following instructions. Install this code by simply downloading it and running it normally in Tuffix. The commands for running are g++ <FILENAME>.cpp -o <FILENAME> and ./<FILENAME>
 (Note: type your desired file name in place of <FILENAME>)
 
 #Configuration 
