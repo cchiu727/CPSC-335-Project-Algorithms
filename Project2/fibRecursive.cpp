@@ -14,7 +14,7 @@ int fib(int n) {
         return (fib(n - 1) + fib (n - 2));
 }
 
-// user prompt to ask user number of terms in the series
+// USER PROMPT ======================================================
 int userPrompt() {
     int num;
     std::cout << "Enter the nth term of the Fibonacci series." << std::endl;
@@ -28,17 +28,9 @@ int userPrompt() {
     
     return num;
 }
+// ==================================================================
 
-/*
-// prints each number in series to console
-void printSeries(int n) {
-    for (int i = 0; i < n; i++) {
-        std::cout << fib(i) << ", ";
-    }
-}
-*/
-
-// main function
+// MAIN FUNCTION ====================================================
 int main() {
     int num = userPrompt();
 
@@ -46,3 +38,4 @@ int main() {
 
     return 0;
 }
+// ==================================================================

@@ -5,38 +5,46 @@
 #include <iostream>
 #include <cmath>
 
-// equation 4/5
+// phi used in equations 4 and 5
 const float phi = 1.61803;
 
 // ALGORITHM FUNCTIONS ==============================================
-// Process:
-// calculate Fn but for p value
-// Fn = ((pow(1 + sqrt(5)), n) - (pow(1 - sqrt(5)), n)) / (pow(2, n) * sqrt(5));
-// Fn =?= Fp * pow((1 + sqrt(5)) / 2), (n - p))
-// Fn+1 =?= Fn * ((1 + sqrt(5)) / 2)
 
-// equation 3
+// equation 3 - calculates Fn
 float fSubN(int n) {
     return (pow((1 + sqrt(5)), n) - pow((1 - sqrt(5)), n)) / (pow(2, n) * sqrt(5));
 }
 
-// algorithm to generate fib list based on p and n
-// p is the starting term, n is the nth term to end at
-void printFibSeries(int p, int n) {
+// equation 4 - calculates Fn based on Fp * phi^(n - p)
+// p is starting term, n is end term marker 
+void fibEqFour(int p, int n) {
     float fSubP = fSubN(p);
 
+    std::cout << "Equation 4 Fibonacci Series: ";
+
     for (int i = p; i <= n; i++) {
-        if (i <= 1) {
-            std::cout << fSubP << ", ";
-        }
-        else {
         std::cout << fSubP << ", ";
-        fSubP = fSubP * phi;   
-        } 
+        fSubP = fSubP * pow(phi, (i - (i - 1)));
     }
 
-    std::cout << std::endl; // formatting
+    std::cout << std::endl;
 }
+
+// equation 5 - calculates Fn+1 based on Fn
+// p is starting term, n is end term marker
+void fibEqFive(int p, int n) {
+    float fSubP = fSubN(p);
+
+    std::cout << "Equation 5 Fibonacci Series: ";
+
+    for (int i = p; i <= n; i++) {
+        std::cout << fSubP << ", ";
+        fSubP *= phi;
+    }
+
+    std::cout << std::endl;
+}
+// ==================================================================
 
 // USER PROMPTS =====================================================
 int promptP() {
@@ -73,7 +81,9 @@ int main() {
     int p = promptP();
     int n = promptN();
 
-    printFibSeries(p, n);
+    fibEqFour(p, n);
+
+    fibEqFive(p, n);
 
     return 0;
 }
