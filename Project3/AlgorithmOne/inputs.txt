@@ -1,0 +1,12 @@
+Inputs for Project 3 Algorithm 1
+
+array 1a = [“sanoaklandrialtofullertonmarcolongchinocoronamodestoclovissimithousand”]
+array 1b = [‘oakland’, ‘modesto’, ‘clovis’, ‘corona’]
+
+
+array 2a = [“polmonafremontrialtofullertonmarcolongfresnochinoclovissimisalinas”]
+array 2b = [‘fullerton’, ‘chino’, ‘fremont’, ‘fresno’]
+
+
+array 3a = [“torranceoaklandrialtomarcooxnardchinofresnoirvineclovissimiorange”]
+array 3b = [‘oxnard’, ‘irvine’, ‘orange’, ‘marco’]
