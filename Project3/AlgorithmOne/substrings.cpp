@@ -1,113 +1,74 @@
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <vector>
-
-std::vector<std::string> concatStrings;
-std::vector<std::string> targetStrings;
+#include <map>
 
 /*
-// CLASS SUBSTRING ==================================================
-class Substring {
-    private:
-        int index;
-        std::string concatStr;
-        std::string targetStrings[4];
-    public:
-        Substring();
-        void setConcatStr();
-        
-};
-
-Substring::Substring() {
-
-}
-
-void Substring::setConcatStr() {
-
-}
-
+// INPUT ARRAYS =====================================================
+// ***Use this section to test different concatenated strings and target strings***
+// ***Replace <CONCATENATED STRING> with your test concatenated string and <TARGET STRING> with your target strings***
+// ***If there are more or less than 4 target strings, change number of elements in array in the index ([ ]) field***
+std::string concatString[1] = {"<CONCATENATED STRING HERE>"};
+std::string targetStrings[4] = {"<TARGET STRING>", "<TARGET STRING>", "<TARGET STRING>", "<TARGET STRING>"};
 // ==================================================================
 */
 
+std::map<std::string, int> indices;
+
+void populateMap(std::string s, int i) {
+    indices.insert(std::pair<std::string, int>(s, i));
+}
+
+void printMap() {
+    std::cout<< "[";
+    for (std::map<std::string, int>::iterator it = indices.begin(); it != indices.end(); it++) {
+        std::cout << it->first << ", ";
+    }
+    std::cout << "]" << std::endl;
+
+    std::cout << "[";    
+    for (std::map<std::string, int>::iterator it = indices.begin(); it != indices.end(); it++) {
+        std::cout << it->second << ",";
+    }
+    std::cout << "]" << std::endl;
+}
+
 // ALGORITHM FUNCTIONS ==============================================
 
+
+void findTarget(std::string concat, std::vector<std::string> v) {
+    int index = 0;
+    bool found = false;
+    
+    for (std::vector<std::string>::iterator vItr = v.begin(); vItr != v.end(); vItr++) {
+        for (int i = 0; i < concat.length(); i++) {
+                if ((*vItr)[i] == concat[i]) {
+                    index = i;
+                    for (int j = 0; j < (*vItr).length(); j++, i++) {
+                        if ((*vItr)[j] == concat[i]) {
+                            found = true;
+                        }
+                        else {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found = true) {
+                        populateMap(*vItr, index);
+                    }    
+                }
+        }
+    }
+}
 // ==================================================================
 
-// PROGRAM FLOW FUNCTIONS =============================================
-// Gets user input for file name string to open the file
-std::string getFileName() {
-    std::string fileName;
-
-    std::cout << "Enter the name of the desired input file." << std::endl;
-    std::cout << "(Example: inputOne.txt): ";
-
-    std::cin >> fileName;
-
-    return fileName;
-}
-
-void printVectors() {
-    for (std::string i : concatStrings) {
-        std::cout << i << " ";
-    }
-
-    for (std::string i : targetStrings) {
-        std::cout << i << " ";
-    }
-}
-// parses input line to retrieve strings from the input file
-void getConcatStr(std::string s) {
-    std::string concat = "";
-    std::string target = "";
-    for (int i = 0; i < s.size(); i++) {
-        if (s[i] == '"') {
-            i++;
-            for (int j = i; s[j] != '"'; j++, i++) {
-                concat += s[j];
-            }
-            std::cout << concat << std::endl;
-            concatStrings.push_back(concat);
-        }
-        else if (s[i] == '\'') {
-            i++;
-            for (int j = i; s[j] != '\''; j++, i++) {
-                target += s[j];
-            }
-            std::cout << target << std::endl;
-            targetStrings.push_back(target);
-            target = "";
-        }
-    }
-}
-
-void getTargetStr(std::string s) {
-    std::string target = "";
-    for (int i = 0; i < s.size(); i++) {
-        if (s[i] == '\'') {
-            i++;
-            for (int j = i; s[j] != '\''; j++, i++) {
-                target += s[j];
-            }
-        }
-    }
-
-    std::cout << target << std::endl;
-}
-
-// ==================================================================
 
 int main() {
-    std::string line;
-    std::string fileName = getFileName();
-    std::ifstream FILE(fileName);
+    std::string concatString = "sanoaklandrialtofullertonmarcolongchinocoronamodestoclovissimithousand";
+    std::vector<std::string> targetStrings = {"oakland", "modesto", "clovis", "corona"};
 
-    while (std::getline(FILE, line)) {
-        std::cout << line << std::endl;
-        getConcatStr(line);
-        
-    }
-    printVectors();
+    findTarget(concatString, targetStrings);
+    printMap();
 
     system("PAUSE");
     return 0;
