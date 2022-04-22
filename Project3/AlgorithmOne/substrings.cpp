@@ -1,74 +1,113 @@
 #include <iostream>
 #include <string>
-#include <vector>
-#include <map>
 
-/*
-// INPUT ARRAYS =====================================================
-// ***Use this section to test different concatenated strings and target strings***
-// ***Replace <CONCATENATED STRING> with your test concatenated string and <TARGET STRING> with your target strings***
-// ***If there are more or less than 4 target strings, change number of elements in array in the index ([ ]) field***
-std::string concatString[1] = {"<CONCATENATED STRING HERE>"};
-std::string targetStrings[4] = {"<TARGET STRING>", "<TARGET STRING>", "<TARGET STRING>", "<TARGET STRING>"};
-// ==================================================================
-*/
+using namespace std;
 
-std::map<std::string, int> indices;
+// IN-PLACE SORTING ALGORITHM ======================================= 
+void sortOutput(int arr[], string strArr[]) {
+    int temp;
+    string strTemp;
 
-void populateMap(std::string s, int i) {
-    indices.(std::pair<std::string, int>(s, i));
-}
+    // sorts two adjacent indices, and both move right once per iteration
+    for (int i = 0; i < 4; i++) {
+        for (int j = i + 1; j < 4; j++) {
+            if (arr[i] > arr[j]) {
+                // swaps adjacent elements
+                temp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = temp;
 
-void printMap() {
-    std::cout<< "[";
-    for (std::map<std::string, int>::iterator it = indices.begin(); it != indices.end(); it++) {
-        std::cout << it->first << ", ";
-    }
-    std::cout << "]" << std::endl;
-
-    std::cout << "[";    
-    for (std::map<std::string, int>::iterator it = indices.begin(); it != indices.end(); it++) {
-        std::cout << it->second << ",";
-    }
-    std::cout << "]" << std::endl;
-}
-
-// ALGORITHM FUNCTIONS ==============================================
-
-
-void findTarget(std::string concat, std::vector<std::string> v) {
-    int index = 0;
-    bool found = false;
-    
-    for (std::vector<std::string>::iterator it = v.begin(); it != v.end(); it++) { // start with word 1, iterate next after 
-        std::cout << *it << std::endl;
-        for (int i = 0; i < concat.length(); i++) { // loops until concatenated string is parsed through
-            if ((*it)[0] == concat[i]) { // if first letter of word found
-                index = i; // set index
-
-                for (int j = 0; j < (*it).length(); j++, i++) { // loops to confirm if each letter matches
-                    if ((*it)[j] == concat[i]) {} // if found, continue loop
-                    else {
-                        index = -1;
-                        break;
-                    }
-                } 
-                //populateMap(*it, index);
+                // same as above but for the string array
+                strTemp = strArr[j];
+                strArr[j] = strArr[i];
+                strArr[i] = strTemp;
             }
         }
-        populateMap(*it, index);
     }
+
+    // printing indices in asc order
+    cout << "[";
+    for (int i = 0; i < 4; i++) {
+        cout << arr[i] << ", ";
+    }
+    cout << "]" << endl;
+
+    // printing target strings asc in order
+    cout << "[";
+    for (int i = 0; i < 4; i++) {
+        cout << strArr[i] << ", ";
+    }
+    cout << "]" << endl;
 }
 // ==================================================================
 
+// FIND TARGET STRING ALGORITHM =====================================
+int findTarget(string concat, string target) {
+    int concatLen = concat.length();
+    int targetLen = target.length();
+
+    int index;
+
+    // loops to parse concatenated string
+    for (int i = 0; i < concatLen; i++) {
+        if (target[0] == concat[i]) { // if target first char match
+            index = i;
+            for (int j = 0; j < targetLen; j++, i++) { // loops to parse target string
+                if (target[j] != concat[i]) { // if not a match
+                    index = -1;
+                    break;
+                }
+            }
+
+            if (index != -1) { // if successful match
+                return index;
+            }
+        }
+    }
+
+    return index; // if unsuccessful match
+} 
+// ==================================================================
 
 int main() {
-    std::string concatString = "sanoaklandrialtofullertonmarcolongchinocoronamodestoclovissimithousand";
-    std::vector<std::string> targetStrings = {"oakland", "modesto", "clovis", "corona"};
+    // Hard-coded inputs
+    string inputStr = "hemetoaklandrialtofullertonmarcolongchinofresnovallejoclovissimithousand";
+    string targetStr[4] = {"clovis", "vallejo", "rialto", "marco"};
 
-    findTarget(concatString, targetStrings);
-    printMap();
+    // prints inputs
+    cout << inputStr << endl;
+    cout << "[";
+    for (int i = 0; i < 4; i++) {
+        cout << targetStr[i] << ", ";
+    }
+    cout << "]" << endl;
+    
+    // USER INPUT
+    /*
+    cout << "Enter the concatenated string: ";
+    cin >> inputStr;
 
-    system("PAUSE");
+    cout << "Enter the four target strings:" << endl;
+    for (int i = 0; i < 4; i++) {
+        cout << "Enter target string " << i + 1 << ": ";
+        cin >> targetStr[i];
+    }
+    */
+
+    // FIND TARGET WORD ALGORITHM ===================================
+    int index;
+    int indices[4];
+    for (int i = 0; i < 4; i++) {
+        index = findTarget(inputStr, targetStr[i]);
+
+        indices[i] = index;
+    }
+    // ==============================================================
+
+    // SORTING ALGORITHM ============================================
+    cout << "Sorted: " << endl;
+    sortOutput(indices, targetStr);
+    //===============================================================
+    
     return 0;
 }
