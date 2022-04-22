@@ -24,7 +24,7 @@ void sortOutput(int arr[], string strArr[]) {
             }
         }
     }
-
+    
     // printing indices in asc order
     cout << "[";
     for (int i = 0; i < 4; i++) {
