@@ -53,6 +53,33 @@ vector<int> mergeKArrays(vector<vector<int> > arr)
 	return output;
 }
 
+void printArrays(vector<vector<int>> arr)
+{
+	for (int i = 0; i < arr.size(); ++i)
+	{
+		cout << "{ ";
+
+		for (int j = 0; j < arr[i].size(); ++j)
+		{
+			if (j + 1 != arr[i].end())
+			{
+				cout << arr[i][j] << ", ";
+			}
+			else
+			{
+				cout << arr[i][j];
+			}
+		}
+		if (arr[i] != arr.end())
+		{
+			cout << "}, "
+		}
+		else
+		{
+			cout << "}}"<< endl;
+		}
+	}
+}
 
 int main()
 {
@@ -63,6 +90,8 @@ int main()
 							{ -10, 81, 121 },
 							{ 4, 6, 12, 20, 150 } };
 
+	
+	void printArrays(arr);
 	vector<int> output = mergeKArrays(arr);
 
 	cout << "Merged array is " << endl;
