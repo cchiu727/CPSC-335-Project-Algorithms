@@ -16,7 +16,7 @@ std::string targetStrings[4] = {"<TARGET STRING>", "<TARGET STRING>", "<TARGET S
 std::map<std::string, int> indices;
 
 void populateMap(std::string s, int i) {
-    indices.insert(std::pair<std::string, int>(s, i));
+    indices.(std::pair<std::string, int>(s, i));
 }
 
 void printMap() {
@@ -40,24 +40,23 @@ void findTarget(std::string concat, std::vector<std::string> v) {
     int index = 0;
     bool found = false;
     
-    for (std::vector<std::string>::iterator vItr = v.begin(); vItr != v.end(); vItr++) {
-        for (int i = 0; i < concat.length(); i++) {
-                if ((*vItr)[i] == concat[i]) {
-                    index = i;
-                    for (int j = 0; j < (*vItr).length(); j++, i++) {
-                        if ((*vItr)[j] == concat[i]) {
-                            found = true;
-                        }
-                        else {
-                            found = false;
-                            break;
-                        }
+    for (std::vector<std::string>::iterator it = v.begin(); it != v.end(); it++) { // start with word 1, iterate next after 
+        std::cout << *it << std::endl;
+        for (int i = 0; i < concat.length(); i++) { // loops until concatenated string is parsed through
+            if ((*it)[0] == concat[i]) { // if first letter of word found
+                index = i; // set index
+
+                for (int j = 0; j < (*it).length(); j++, i++) { // loops to confirm if each letter matches
+                    if ((*it)[j] == concat[i]) {} // if found, continue loop
+                    else {
+                        index = -1;
+                        break;
                     }
-                    if (found = true) {
-                        populateMap(*vItr, index);
-                    }    
-                }
+                } 
+                //populateMap(*it, index);
+            }
         }
+        populateMap(*it, index);
     }
 }
 // ==================================================================
