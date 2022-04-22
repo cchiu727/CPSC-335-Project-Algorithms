@@ -2,113 +2,70 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <utility>
+#include <queue>
 
-std::vector<std::string> concatStrings;
-std::vector<std::string> targetStrings;
+using namespace std;
 
-/*
-// CLASS SUBSTRING ==================================================
-class Substring {
-    private:
-        int index;
-        std::string concatStr;
-        std::string targetStrings[4];
-    public:
-        Substring();
-        void setConcatStr();
 
-};
+// A pair of pairs, first element is going to
+// store value, second element index of array
+// and third element index in the array.
+typedef pair<int, pair<int, int> > ppi;
 
-Substring::Substring() {
+// This function takes an array of arrays as an
+// argument and all arrays are assumed to be
+// sorted. It merges them together and prints
+// the final sorted output.
+vector<int> mergeKArrays(vector<vector<int> > arr)
+{
+	vector<int> output;
 
+	// Create a min heap with k heap nodes. Every
+	// heap node has first element of an array
+	priority_queue<ppi, vector<ppi>, greater<ppi> > pq;
+
+	for (int i = 0; i < arr.size(); i++)
+		pq.push({ arr[i][0], { i, 0 } });
+
+	// Now one by one get the minimum element
+	// from min heap and replace it with next
+	// element of its array
+	while (pq.empty() == false) {
+		ppi curr = pq.top();
+		pq.pop();
+
+		// i ==> Array Number
+		// j ==> Index in the array number
+		int i = curr.second.first;
+		int j = curr.second.second;
+
+		output.push_back(curr.first);
+
+		// The next element belongs to same array as
+		// current.
+		if (j + 1 < arr[i].size())
+			pq.push({ arr[i][j + 1], { i, j + 1 } });
+	}
+
+	return output;
 }
 
-void Substring::setConcatStr() {
+// Driver program to test above functions
+int main()
+{
+	// Change n at the top to change number
+	// of elements in an array
+	vector<vector<int> > arr{ { 2, 5, 9, 21 },
+							{ -1, 0, 2 },
+							{ -10, 81, 121 },
+							{ 4, 6, 12, 20, 150 } };
 
-}
+	vector<int> output = mergeKArrays(arr);
 
-// ==================================================================
-*/
+	cout << "Merged array is " << endl;
+	for (auto x : output)
+		cout << x << " ";
 
-// ALGORITHM FUNCTIONS ==============================================
-
-// ==================================================================
-
-// PROGRAM FLOW FUNCTIONS =============================================
-// Gets user input for file name string to open the file
-std::string getFileName() {
-    std::string fileName;
-
-    std::cout << "Enter the name of the desired input file." << std::endl;
-    std::cout << "(Example: inputOne.txt): ";
-
-    std::cin >> fileName;
-
-    return fileName;
-}
-
-void printVectors() {
-    for (std::string i : concatStrings) {
-        std::cout << i << " ";
-    }
-
-    for (std::string i : targetStrings) {
-        std::cout << i << " ";
-    }
-}
-// parses input line to retrieve strings from the input file
-void getConcatStr(std::string s) {
-    std::string concat = "";
-    std::string target = "";
-    for (int i = 0; i < s.size(); i++) {
-        if (s[i] == '"') {
-            i++;
-            for (int j = i; s[j] != '"'; j++, i++) {
-                concat += s[j];
-            }
-            std::cout << concat << std::endl;
-            concatStrings.push_back(concat);
-        }
-        else if (s[i] == '\'') {
-            i++;
-            for (int j = i; s[j] != '\''; j++, i++) {
-                target += s[j];
-            }
-            std::cout << target << std::endl;
-            targetStrings.push_back(target);
-            target = "";
-        }
-    }
-}
-
-void getTargetStr(std::string s) {
-    std::string target = "";
-    for (int i = 0; i < s.size(); i++) {
-        if (s[i] == '\'') {
-            i++;
-            for (int j = i; s[j] != '\''; j++, i++) {
-                target += s[j];
-            }
-        }
-    }
-
-    std::cout << target << std::endl;
-}
-
-// ==================================================================
-
-int main() {
-    std::string line;
-    std::string fileName = getFileName();
-    std::ifstream FILE(fileName);
-
-    while (std::getline(FILE, line)) {
-        std::cout << line << std::endl;
-        getConcatStr(line);
-
-    }
-    printVectors();
-
-    system("PAUSE");
-    return 0;
+	return 0;
 }
