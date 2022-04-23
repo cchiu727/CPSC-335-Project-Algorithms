@@ -1,114 +1,111 @@
 #include <iostream>
-#include <fstream>
 #include <string>
-#include <vector>
 
-std::vector<std::string> concatStrings;
-std::vector<std::string> targetStrings;
+using namespace std;
 
-/*
-// CLASS SUBSTRING ==================================================
-class Substring {
-    private:
-        int index;
-        std::string concatStr;
-        std::string targetStrings[4];
-    public:
-        Substring();
-        void setConcatStr();
-        
-};
+// IN-PLACE SORTING ALGORITHM ======================================= 
+void sortOutput(int arr[], string strArr[]) {
+    int temp;
+    string strTemp;
 
-Substring::Substring() {
+    // sorts two adjacent indices, and both move right once per iteration
+    for (int i = 0; i < 4; i++) {
+        for (int j = i + 1; j < 4; j++) {
+            if (arr[i] > arr[j]) {
+                // swaps adjacent elements
+                temp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = temp;
 
+                // same as above but for the string array
+                strTemp = strArr[j];
+                strArr[j] = strArr[i];
+                strArr[i] = strTemp;
+            }
+        }
+    }
+
+    // printing indices in asc order
+    cout << "[";
+    for (int i = 0; i < 4; i++) {
+        cout << arr[i] << ", ";
+    }
+    cout << "]" << endl;
+
+    // printing target strings asc in order
+    cout << "[";
+    for (int i = 0; i < 4; i++) {
+        cout << strArr[i] << ", ";
+    }
+    cout << "]" << endl;
 }
-
-void Substring::setConcatStr() {
-
-}
-
 // ==================================================================
-*/
 
-// ALGORITHM FUNCTIONS ==============================================
+// FIND TARGET STRING ALGORITHM =====================================
+int findTarget(string concat, string target) {
+    int index = 0;
 
-// ==================================================================
-
-// PROGRAM FLOW FUNCTIONS =============================================
-// Gets user input for file name string to open the file
-std::string getFileName() {
-    std::string fileName;
-
-    std::cout << "Enter the name of the desired input file." << std::endl;
-    std::cout << "(Example: inputOne.txt): ";
-
-    std::cin >> fileName;
-
-    return fileName;
-}
-
-void printVectors() {
-    for (std::string i : concatStrings) {
-        std::cout << i << " ";
-    }
-
-    for (std::string i : targetStrings) {
-        std::cout << i << " ";
-    }
-}
-// parses input line to retrieve strings from the input file
-void getConcatStr(std::string s) {
-    std::string concat = "";
-    std::string target = "";
-    for (int i = 0; i < s.size(); i++) {
-        if (s[i] == '"') {
-            i++;
-            for (int j = i; s[j] != '"'; j++, i++) {
-                concat += s[j];
+    // loops to parse concatenated string
+    for (int i = 0; i < concat.length(); i++)
+    {
+        if (target[0] == concat[i])
+        { // if target first char match
+            index = i;
+            for (int j = 0; j < target.length(); j++, i++)
+            { // loops to parse target string
+                if (target[j] != concat[i]) { // if not a match
+                    index = -1;
+                    --i;
+                    break;
+                }
             }
-            std::cout << concat << std::endl;
-            concatStrings.push_back(concat);
-        }
-        else if (s[i] == '\'') {
-            i++;
-            for (int j = i; s[j] != '\''; j++, i++) {
-                target += s[j];
-            }
-            std::cout << target << std::endl;
-            targetStrings.push_back(target);
-            target = "";
-        }
-    }
-}
 
-void getTargetStr(std::string s) {
-    std::string target = "";
-    for (int i = 0; i < s.size(); i++) {
-        if (s[i] == '\'') {
-            i++;
-            for (int j = i; s[j] != '\''; j++, i++) {
-                target += s[j];
+            if (index != -1) { // if successful match
+                return index;
             }
         }
     }
 
-    std::cout << target << std::endl;
+    return index; // if unsuccessful match
 }
-
 // ==================================================================
 
 int main() {
-    std::string line;
-    std::string fileName = getFileName();
-    std::ifstream FILE(fileName);
+    string inputStr;
+    string targetStr[4];
 
-    while (std::getline(FILE, line)) {
-        std::cout << line << std::endl;
-        getConcatStr(line);
-        
+    // USER INPUT
+    cout << "Enter the concatenated string: ";
+    cin >> inputStr;
+
+    cout << "Enter the four target strings:" << endl;
+    for (int i = 0; i < 4; i++) {
+        cout << "Enter target string " << i + 1 << ": ";
+        cin >> targetStr[i];
     }
-    printVectors();
 
-    system("PAUSE");
+    // prints inputs
+    cout << inputStr << endl;
+    cout << "[";
+    for (int i = 0; i < 4; i++) {
+        cout << targetStr[i] << ", ";
+    }
+    cout << "]" << endl;
+
+    // FIND TARGET WORD ALGORITHM ===================================
+    int index;
+    int indices[4];
+    for (int i = 0; i < 4; i++) {
+        index = findTarget(inputStr, targetStr[i]);
+
+        indices[i] = index;
+    }
+    // ==============================================================
+
+    // SORTING ALGORITHM ============================================
+    cout << "Sorted: " << endl;
+    sortOutput(indices, targetStr);
+    //===============================================================
+
     return 0;
 }
