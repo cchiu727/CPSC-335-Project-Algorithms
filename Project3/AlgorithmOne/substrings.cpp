@@ -52,6 +52,7 @@ int findTarget(string concat, string target) {
             for (int j = 0; j < target.length(); j++, i++) { // loops to parse target string
                 if (target[j] != concat[i]) { // if not a match
                     index = -1;
+                    i--;
                     break;
                 }
             }
