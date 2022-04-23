@@ -43,16 +43,13 @@ void sortOutput(int arr[], string strArr[]) {
 
 // FIND TARGET STRING ALGORITHM =====================================
 int findTarget(string concat, string target) {
-    int concatLen = concat.length();
-    int targetLen = target.length();
-
     int index;
 
     // loops to parse concatenated string
-    for (int i = 0; i < concatLen; i++) {
+    for (int i = 0; i < concat.length(); i++) {
         if (target[0] == concat[i]) { // if target first char match
             index = i;
-            for (int j = 0; j < targetLen; j++, i++) { // loops to parse target string
+            for (int j = 0; j < target.length(); j++, i++) { // loops to parse target string
                 if (target[j] != concat[i]) { // if not a match
                     index = -1;
                     break;
@@ -70,20 +67,10 @@ int findTarget(string concat, string target) {
 // ==================================================================
 
 int main() {
-    // Hard-coded inputs
-    string inputStr = "hemetoaklandrialtofullertonmarcolongchinofresnovallejoclovissimithousand";
-    string targetStr[4] = {"clovis", "vallejo", "rialto", "marco"};
-
-    // prints inputs
-    cout << inputStr << endl;
-    cout << "[";
-    for (int i = 0; i < 4; i++) {
-        cout << targetStr[i] << ", ";
-    }
-    cout << "]" << endl;
+    string inputStr;
+    string targetStr[4];
     
     // USER INPUT
-    /*
     cout << "Enter the concatenated string: ";
     cin >> inputStr;
 
@@ -92,7 +79,14 @@ int main() {
         cout << "Enter target string " << i + 1 << ": ";
         cin >> targetStr[i];
     }
-    */
+
+    // prints inputs
+    cout << inputStr << endl;
+    cout << "[";
+    for (int i = 0; i < 4; i++) {
+        cout << targetStr[i] << ", ";
+    }
+    cout << "]" << endl;
 
     // FIND TARGET WORD ALGORITHM ===================================
     int index;
