@@ -1,96 +1,79 @@
 #include <iostream>
-#include <fstream>
-#include <string>
 #include <vector>
-#include <utility>
-#include <queue>
 
 using namespace std;
 
-
-// A pair of pairs, first element is going to
-// store value, second element index of array
-// and third element index in the array.
-typedef pair<int, pair<int, int> > pairIndex;//change name $ (side note this a defenition of a type of pair that can be created not the name of the varible)
-
-// This function takes an array of arrays as an
-// argument and all arrays are assumed to be
-// sorted. It merges them together and prints
-// the final sorted output.
-vector<int> mergeKArrays(vector<vector<int> > arr)
-{
-	vector<int> output;
-
-	// Create a min heap with k heap nodes. Every
-	// heap node has first element of an array
-	priority_queue<pairIndex, vector<pairIndex>, greater<pairIndex> > pairQueue;
-
-	for (int i = 0; i < arr.size(); i++)
-	{
-		pairQueue.push({ arr[i][0], { i, 0 } });
-	}
-	// Now one by one get the minimum element
-	// from min heap and replace it with next
-	// element of its array
-	while (!pairQueue.empty())
-	{
-		pairIndex curr = pairQueue.top();
-		pairQueue.pop();
-
-		// i ==> Array Number
-		// j ==> Index in the array number(genuelly am lost how this works)
-		int i = curr.second.first;
-		int j = curr.second.second;
-
-		output.push_back(curr.first);
-
-		// The next element belongs to same array as
-		// current.
-		if (j + 1 < arr[i].size())
-			pairQueue.push({ arr[i][j + 1], { i, j + 1 } });
-	}
-
-	return output;
-}
-void printArrays(vector<vector<int> > arr)
-{
-	for (int i = 0; i < arr.size(); ++i)
-	{
-		cout << "{ ";
-
-		for (int j = 0; j < arr[i].size(); ++j)
-		{
-			if (j + 1 != arr[i].size())
-			{
-				cout << arr[i][j] << ", ";
-			}
-			else
-			{
-				cout << arr[i][j];
-			}
-		}
-
-		cout << "} ";
-
-	}
-	cout << endl;
+void printArray(vector<int> arr) {
+    cout << "{";
+        for (int i = 0; i < arr.size(); i++) {
+            cout << arr[i] << ", ";
+        }
+        cout << "}" << endl;
 }
 
-int main()
-{
+// ALGORITHM FUNCTIONS ==============================================
+vector<int> sortArray(vector<int> arr) {
+    for (int i = 0; i < arr.size(); i++) {
+        for (int j = i + 1; j < arr.size(); j++) {
+            if (arr[i] > arr[j]) {
+                swap(arr[i], arr[j]);
+            }
+        }
+    }
+    
+    return arr;
+}
 
-	// of elements in an array
-	vector<vector<int> > arr{ { 2, 5, 9, 21 },
-							{ -1, 0, 2 },
-							{ -10, 81, 121 },
-							{ 4, 6, 12, 20, 150 } };
+vector<int> mergeArrays(vector<vector<int>> arr) {
+    vector<int> outputArr;
+    
+    for (int i = 0; i < arr.size(); i++) {
+        for (int j = 0; j < arr[i].size(); j++) {
+            outputArr.push_back(arr[i][j]);
+        }
+    }
+    
+    return sortArray(outputArr);
+}
+// ==================================================================
 
-	printArrays(arr);
-	vector<int> output = mergeKArrays(arr);
+int main() {
+    vector<vector<int>> inputArr;
+    vector<int> outputArr;
 
-	cout << "Merged array is " << endl;
-	for (auto x : output)
-		cout << x << " ";
+    // TEST ONE
+    inputArr  = {{2, 5, 9, 21},
+                {-1, 0, 2},
+                {-10, 81, 121},
+                {4, 6, 12, 20, 150}};
+    outputArr = mergeArrays(inputArr);
+    printArray(outputArr);
 
-	return 0;
+    // TEST TWO
+    inputArr = {{10, 17, 18, 21, 29},
+                {-3, 0, 3, 7, 8},
+                {81, 88, 121, 131},
+                {9, 11, 12, 19, 29}};
+    outputArr = mergeArrays(inputArr);
+    printArray(outputArr);            
+    
+    // TEST THREE
+    inputArr = {{-4, -2, 0, 2, 7},
+                {4, 6, 12, 14},
+                {10, 15, 25},
+                {5, 6, 10, 20, 24}};
+    outputArr = mergeArrays(inputArr);
+    printArray(outputArr);
+
+    // TEST CUSTOM
+    // Add any elements here separated by commas
+    // To add another array, create it between brackets {} and [...]
+    // [...] add a comma after the preceding array.
+    inputArr = {{0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}};
+    outputArr = mergeArrays(inputArr);
+    printArray(outputArr);              
+    return 0;
 }
